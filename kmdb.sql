@@ -109,7 +109,7 @@ CREATE TABLE top_cast (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT,
     name TEXT,
-    role TEXT,
+    role TEXT
 );
 
 INSERT INTO movies (title, year, mpaa_rating, director)
@@ -150,7 +150,7 @@ VALUES ("The Dark Knight Rises", "Joseph Gordon-Levitt", "John Blake");
 INSERT INTO top_cast (title, name, role)
 VALUES ("The Dark Knight Rises", "Anne Hathaway", "Selina Kyle");
 
-
+.mode column
 
 
 
