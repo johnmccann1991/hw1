@@ -109,7 +109,7 @@ CREATE TABLE movies (
 CREATE TABLE performers (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT
-)
+);
 
 CREATE TABLE top_cast (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -117,8 +117,6 @@ CREATE TABLE top_cast (
     performer_id INTEGER,
     role TEXT
 );
-
-
 
 
 INSERT INTO movies (title, year, mpaa_rating, performer_id)
@@ -184,10 +182,20 @@ VALUES ("Anne Hathaway");
 INSERT INTO performers (name)
 VALUES ("Christopher Nolan");
 
-SELECT title, year, mpaa_rating, performers.name FROM movies INNER JOIN performers ON performers.id = movies.performer_id GROUP BY title ORDER BY release_date;
+
+.print "Movies"
+.print "======"
+.print ""
+
+SELECT title, year, mpaa_rating, performers.name FROM movies INNER JOIN performers ON performers.id = movies.performer_id GROUP BY title ORDER BY year;
+
+
+.print ""
+.print "Top Cast"
+.print "========"
+.print ""
 
 SELECT movies.title, performers.name, top_cast.role FROM top_cast INNER JOIN movies ON movies.id = top_cast.movie_id INNER JOIN performers ON performers.id = top_cast.performer_id;
-
 
 
 
