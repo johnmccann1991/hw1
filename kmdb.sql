@@ -96,62 +96,116 @@
 
 DROP TABLE IF EXISTS movies ;
 DROP TABLE IF EXISTS top_cast ;
+DROP TABLE IF EXISTS performers ;
 
 CREATE TABLE movies (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT,
     year INTEGER,
     mpaa_rating TEXT,
-    director TEXT
+    performer_id TEXT
 );
+
+CREATE TABLE performers (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT
+)
 
 CREATE TABLE top_cast (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    title TEXT,
-    name TEXT,
+    movie_id INTEGER,
+    performer_id INTEGER,
     role TEXT
 );
 
 
 
 
-INSERT INTO movies (title, year, mpaa_rating, director)
-VALUES ("Batman Begins", 2005, "PG-13", "Christopher Nolan");
-INSERT INTO movies (title, year, mpaa_rating, director)
-VALUES ("The Dark Knight", 2008, "PG-13", "Christopher Nolan");
-INSERT INTO movies (title, year, mpaa_rating, director)
-VALUES ("The Dark Knight Rises", 2012, "PG-13", "Christopher Nolan");
+INSERT INTO movies (title, year, mpaa_rating, performer_id)
+VALUES ("Batman Begins", 2005, "PG-13", 12);
+INSERT INTO movies (title, year, mpaa_rating, performer_id)
+VALUES ("The Dark Knight", 2008, "PG-13", 12);
+INSERT INTO movies (title, year, mpaa_rating, performer_id)
+VALUES ("The Dark Knight Rises", 2012, "PG-13", 12);
 
-INSERT INTO top_cast (title, name, role)
-VALUES ("Batman Begins", "Christian Bale", "Bruce Wayne");
-INSERT INTO top_cast (title, name, role)
-VALUES ("Batman Begins", "Michael Caine", "Alfred");
-INSERT INTO top_cast (title, name, role)
-VALUES ("Batman Begins", "Liam Neeson", "Ra's Al Ghul");
-INSERT INTO top_cast (title, name, role)
-VALUES ("Batman Begins", "Katie Holmes", "Rachel Dawes");
-INSERT INTO top_cast (title, name, role)
-VALUES ("Batman Begins", "Gary Oldman", "Commisioner Gordon");
-INSERT INTO top_cast (title, name, role)
-VALUES ("The Dark Knight", "Christian Bale", "Bruce Wayne");
-INSERT INTO top_cast (title, name, role)
-VALUES ("The Dark Knight", "Heath Ledger", "Joker");
-INSERT INTO top_cast (title, name, role)
-VALUES ("The Dark Knight", "Aaron Eckhart", "Harvey Dent");
-INSERT INTO top_cast (title, name, role)
-VALUES ("The Dark Knight", "Michael Caine", "Alfred");
-INSERT INTO top_cast (title, name, role)
-VALUES ("The Dark Knight", "Maggie Gyllenhaal", "Rachel Dawes");
-INSERT INTO top_cast (title, name, role)
-VALUES ("The Dark Knight Rises", "Christian Bale", "Bruce Wayne");
-INSERT INTO top_cast (title, name, role)
-VALUES ("The Dark Knight Rises", "Gary Oldman", "Commisioner Gordon");
-INSERT INTO top_cast (title, name, role)
-VALUES ("The Dark Knight Rises", "Tom Hardy", "Bane");
-INSERT INTO top_cast (title, name, role)
-VALUES ("The Dark Knight Rises", "Joseph Gordon-Levitt", "John Blake");
-INSERT INTO top_cast (title, name, role)
-VALUES ("The Dark Knight Rises", "Anne Hathaway", "Selina Kyle");
+INSERT INTO top_cast (movie_id, performer_id, role)
+VALUES (1, 1, "Bruce Wayne");
+INSERT INTO top_cast (movie_id, performer_id, role)
+VALUES (1, 2, "Alfred");
+INSERT INTO top_cast (movie_id, performer_id, role)
+VALUES (1, 3, "Ra's Al Ghul");
+INSERT INTO top_cast (movie_id, performer_id, role)
+VALUES (1, 4, "Rachel Dawes");
+INSERT INTO top_cast (movie_id, performer_id, role)
+VALUES (1, 5, "Commisioner Gordon");
+INSERT INTO top_cast (movie_id, performer_id, role)
+VALUES (2, 1, "Bruce Wayne");
+INSERT INTO top_cast (movie_id, performer_id, role)
+VALUES (2, 6, "Joker");
+INSERT INTO top_cast (movie_id, performer_id, role)
+VALUES (2, 7, "Harvey Dent");
+INSERT INTO top_cast (movie_id, performer_id, role)
+VALUES (2, 2, "Alfred");
+INSERT INTO top_cast (movie_id, performer_id, role)
+VALUES (2, 8, "Rachel Dawes");
+INSERT INTO top_cast (movie_id, performer_id, role)
+VALUES (3, 1, "Bruce Wayne");
+INSERT INTO top_cast (movie_id, performer_id, role)
+VALUES (3, 5, "Commisioner Gordon");
+INSERT INTO top_cast (movie_id, performer_id, role)
+VALUES (3, 9, "Bane");
+INSERT INTO top_cast (movie_id, performer_id, role)
+VALUES (3, 10, "John Blake");
+INSERT INTO top_cast (movie_id, performer_id, role)
+VALUES (3, 11, "Selina Kyle");
+
+INSERT INTO performers (name)
+VALUES ("Christian Bale");
+INSERT INTO performers (name)
+VALUES ("Michael Caine");
+INSERT INTO performers (name)
+VALUES ("Liam Neeson");
+INSERT INTO performers (name)
+VALUES ("Katie Holmes");
+INSERT INTO performers (name)
+VALUES ("Gary Oldman");
+INSERT INTO performers (name)
+VALUES ("Heath Ledger");
+INSERT INTO performers (name)
+VALUES ("Aaron Eckhart");
+INSERT INTO performers (name)
+VALUES ("Maggie Gyllenhaal");
+INSERT INTO performers (name)
+VALUES ("Tom Hardy");
+INSERT INTO performers (name)
+VALUES ("Joseph Gordon-Levitt");
+INSERT INTO performers (name)
+VALUES ("Anne Hathaway");
+INSERT INTO performers (name)
+VALUES ("Christopher Nolan");
+
+SELECT title, year, mpaa_rating, performers.name FROM movies INNER JOIN performers ON performers.id = movies.performer_id GROUP BY title ORDER BY release_date;
+
+SELECT movies.title, performers.name, top_cast.role FROM top_cast INNER JOIN movies ON movies.id = top_cast.movie_id INNER JOIN performers ON performers.id = top_cast.performer_id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .mode column
 
